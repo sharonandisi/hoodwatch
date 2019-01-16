@@ -63,3 +63,23 @@ def edit_profile(request,username):
         else:
             form = ProfileForm()
     return render(request, 'edit_profile.html', {"form":form})
+
+
+def new_business(request):
+    profile = Profile.object.get(user = request.user)
+    if request.method == 'POST':
+        form BusinessForm(reuest.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = profile
+            business.neighbourhood = profile.neighbourhood
+            business.save()
+        return redirect('index')
+
+    else:
+        form = BusinessForm()
+    context = {
+        'form': form
+    }
+
+    return render(request, 'new_business.html', context)
