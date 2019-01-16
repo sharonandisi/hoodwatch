@@ -46,4 +46,20 @@ def profile(request, username):
 
 def edit_profile(request,username):
     current_user = request.user
-    if request.method
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=current_user)
+        form = ProfileForm(request.POST,instance=profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+        return redirect ('profile', username = request.user)
+
+    else:
+        if Profile.objects.filter(user=current_user):
+            profile = Profile.objects.get(user=current_user)
+            form = ProfileForm(instance=profile)
+        
+        else:
+            form = ProfileForm()
+    return render(request, 'edit_profile.html', {"form":form})
