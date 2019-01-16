@@ -76,7 +76,7 @@ class Post(models.Model):
     title = models.CharField(max_length = 50)
     content = models.TextField()
     user = models.ForeignKey (User, on_delete = models.CASCADE)
-    neighbourhood = models.ForeignKey 
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, null=True)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):

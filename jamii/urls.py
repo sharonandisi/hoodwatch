@@ -6,6 +6,7 @@ from . import views
 
 urlpatterns = [
     url('^$', views.index, name='index'),
+    url('^post/', views.post, name='post'),
     url(r'^search/', views.search, name='search'),
     url(r'^profile/(?P<username>\w{0,50})$', views.profile, name='profile'),
     url(r'^edit_profile/(?P<username>\w{0,50})$', views.edit_profile, name='edit_profile'),

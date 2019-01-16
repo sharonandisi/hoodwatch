@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        {% for post in posts %}
+        <div class="card-body">
+            <h1 class="card-title">{{post.title}}</h1>
+            <p class="card-text">{{post.content}}</p>
+            <p class="card-text">Posted by: {{post.user}}</p>
+        
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form%}
+                <input type="submit" value="Comment" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+    <ul class="list-group mt-4">
+        {% for comment in comments%}
+        <li class="list-group-item mb-2">{{comment.comment}}</li>
+        {% endfor%}
+        {% endfor %}
+    </ul>
+    <div>
+    <a href ="{% url 'new_post' %}">Add new post</a>
+    </div>
+</div>
+{% endblock %}

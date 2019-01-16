@@ -2,6 +2,24 @@
 {% load bootstrap4 %}
 {% load static %}
 
-<html>
-    <h1>hello</h1>
-</html>
+{% block content %}   
+       
+    <div class="container-fluid" >
+        {% if businesses %}
+        <div class="card">
+            {% for business in businesses %}
+                <ul>
+                    <li>Name: {{business.name}}</li>
+                    <li>Description: {{business.description}}</li>
+                    <li>Owner: {{business.user}}</li>
+                    <li>Email: {{business.email}}</li>
+                </ul>
+            
+            {% endfor %}
+        {% else%}
+        <h1 class="text-center">No business available.</h1>
+        {% endif%}
+        <a href="{% url 'new_business' %}" class="btn btn-secondary">Add Business</a>
+    </div>
+
+{% endblock %}

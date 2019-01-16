@@ -11,11 +11,32 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/accounts/login/')
 def index(request):
+    profile = Profile.objects.get(user = request.user)
     current_user = request.user
+    posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
+    businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
    
 
-    return render(request, 'index.html')
+    return render(request, 'index.html', {"posts":posts,"profile":profile, "businesses": businesses})
 
+@login_required(login_url='/accounts/login/')
+def post(request):
+    profile = Profile.objects.get(user = request.user)
+    current_user = request.user
+    posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
+    comments = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = post
+            comment.save()
+        return redirect('post', id)
+    else:
+        form = CommentForm()
+
+    return render(request, 'post.html', {"posts":posts, "profile":profile, "comments":comments, "form":form})
 
 def search(request):
     if 'business' in request.GET and request.GET['business']:
@@ -35,7 +56,7 @@ def profile(request, username):
     context = {
         'profile': profile
     }
-    return redirect(request,'profile.html', context)
+    return render(request,'profile.html', context)
 
 def edit_profile(request,username):
     current_user = request.user
@@ -57,9 +78,9 @@ def edit_profile(request,username):
             form = ProfileForm()
     return render(request, 'edit_profile.html', {"form":form})
 
-
+login_required(login_url='/accounts/login/')
 def new_business(request):
-    profile = Profile.object.get(user = request.user)
+    profile = Profile.objects.get(user = request.user)
     if request.method == 'POST':
         form = BusinessForm(request.POST)
         if form.is_valid():
@@ -71,15 +92,12 @@ def new_business(request):
 
     else:
         form = BusinessForm()
-    context = {
-        'form': form
-    }
 
-    return render(request, 'new_business.html', context)
+    return render(request, 'new_business.html', {"profile":profile, "form":form})
 
 
 def new_post(request):
-    profile = Profile.object.get(user = request.user)
+    profile = Profile.objects.get(user = request.user)
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -87,8 +105,8 @@ def new_post(request):
             post.user = request.user
             post.neighbourhood = profile.neighbourhood
             post.save()
-        return redirect('index')
+        return redirect('post')
     else:
         form = PostForm()
-    return render(request, 'new_post.html', {"posts":posts, "profile":profile,"form":form})
+    return render(request, 'new_post.html', { "profile":profile,"form":form})
 
