@@ -83,3 +83,19 @@ def new_business(request):
     }
 
     return render(request, 'new_business.html', context)
+
+
+def new_post(request):
+    profile = Profile.object.get(user = request.user)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.neighbourhood = profile.neighbourhood
+            post.save()
+        return redirect('index')
+    else:
+        form = PostForm()
+    return render(request, 'new_post.html', {"posts":posts, "profile":profile,"form":form})
+
