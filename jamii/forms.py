@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, Business, Neighbourhood, Post, Comment
+from .models import Profile, Business, Neighbourhood, Post, Comment
 
 
 class ProfileForm(forms.ModelForm):

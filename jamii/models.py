@@ -14,7 +14,7 @@ class Neighbourhood(models.Model):
     name = models.CharField(max_length = 30)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     occupants = models.IntegerField(null=True, default=0)
-
+    
     def __str__(self):
         return self.name
     
@@ -38,6 +38,7 @@ class Neighbourhood(models.Model):
 
 class Profile(models.Model):
     name = models.CharField(max_length = 30)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, null=True)
     email = models.EmailField(max_length = 30)
     bio = models.TextField(null=True)
     email = models.EmailField(max_length = 60)

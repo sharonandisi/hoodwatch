@@ -1,57 +1,30 @@
-<!-- navigation -->
-<nav class="pages-nav">
-    <div class="pages-nav__item"><a class="link link--page" href="#page-home">Home</a></div>
-    <div class="pages-nav__item"><a class="link link--page" href="#page-docu">Documentation</a></div>
-    <div class="pages-nav__item"><a class="link link--page" href="#page-manuals">Manuals</a></div>
-    <div class="pages-nav__item"><a class="link link--page" href="#page-software">Software</a></div>
-    <div class="pages-nav__item"><a class="link link--page" href="#page-custom">Customization & Settings</a></div>
-    <div class="pages-nav__item"><a class="link link--page" href="#page-training">Training</a></div>
-    <div class="pages-nav__item pages-nav__item--small"><a class="link link--page link--faded" href="#page-buy">Where
-            to buy</a></div>
-    <div class="pages-nav__item pages-nav__item--small"><a class="link link--page link--faded" href="#page-blog">Blog &
-            News</a></div>
-    <div class="pages-nav__item pages-nav__item--small"><a class="link link--page link--faded" href="#page-contact">Contact</a></div>
-    <div class="pages-nav__item pages-nav__item--social">
-        <a class="link link--social link--faded" href="#"><i class="fa fa-twitter"></i><span class="text-hidden">Twitter</span></a>
-        <a class="link link--social link--faded" href="#"><i class="fa fa-linkedin"></i><span class="text-hidden">LinkedIn</span></a>
-        <a class="link link--social link--faded" href="#"><i class="fa fa-facebook"></i><span class="text-hidden">Facebook</span></a>
-        <a class="link link--social link--faded" href="#"><i class="fa fa-youtube-play"></i><span class="text-hidden">YouTube</span></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'index' %}" style= "font-size:x-large">Jamii</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' user %}">PROFILE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">CONTACT</a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="/accounts/password/change">Change Password</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </nav>
-<!-- /navigation-->
-<!-- pages stack -->
-<div class="pages-stack">
-    <!-- page -->
-    <div class="page" id="page-home">
-        <!-- page content -->
-    </div>
-    <!-- /page -->
-    <div class="page" id="page-docu">
-        <!-- page content -->
-    </div>
-    <div class="page" id="page-manuals">
-        <!-- page content -->
-    </div>
-    <div class="page" id="page-software">
-        <!-- page content -->
-    </div>
-    <div class="page" id="page-custom">
-        <!-- page content -->
-    </div>
-    <div class="page" id="page-training">
-        <!-- page content -->
-    </div>
-    <div class="page" id="page-buy">
-        <!-- page content -->
-    </div>
-    <div class="page" id="page-blog">
-        <!-- page content -->
-    </div>
-    <div class="page" id="page-contact">
-        <!-- page content -->
-    </div>
-</div>
-<!-- /pages-stack -->
-<button class="menu-button"><span>Menu</span></button>
-<script src="js/classie.js"></script>
-<script src="js/main.js"></script>

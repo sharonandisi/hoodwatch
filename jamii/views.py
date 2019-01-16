@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Profile, Post, Business, Comment, Neighbourhood
 from .forms import ProfileForm, NeighbourhoodForm, PostForm, CommentForm, BusinessForm
 from django.contrib.auth.models import User
@@ -12,16 +12,9 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/accounts/login/')
 def index(request):
     current_user = request.user
-    try:
-        profile = Profile.objects.get(user = current_user)
-    except:
-        return redirect('edit_profile',username = current_user.username)
-    
+   
 
-    businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
-    posts = Post.objects.filter(neighbourhood =profile.neighbourhood)
-
-    return render(request, 'index.html', {"posts":posts, "profile":profile, "business": businesses})
+    return render(request, 'index.html')
 
 
 def search(request):
@@ -68,7 +61,7 @@ def edit_profile(request,username):
 def new_business(request):
     profile = Profile.object.get(user = request.user)
     if request.method == 'POST':
-        form BusinessForm(reuest.POST)
+        form = BusinessForm(request.POST)
         if form.is_valid():
             business = form.save(commit=False)
             business.user = profile
