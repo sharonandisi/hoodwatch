@@ -31,7 +31,7 @@ An app that allows users to sign up and select their neighbourhoods, see the bus
 
 #### Clone the Repo and checkout into the project folder.
 ```bash
-git clone git@github.com:sharonandisi/foodgram.git && cd foodgram
+git clone git@github.com:sharonandisi/hoodwatch.git && cd foodgram
 ```
 
 #### Create and activate the virtual environment
