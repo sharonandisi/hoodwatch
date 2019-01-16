@@ -1,0 +1,4 @@
+.vscode/
+virtual/
+watch/__pycache__/
+.env
