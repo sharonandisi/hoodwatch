@@ -25,4 +25,25 @@ def index(request):
 
 
 def search(request):
-    if 'busi'
+    if 'business' in request.GET and request.GET['business']:
+        search_term = request.GET.get('business')
+        results = Business.objects.filter(name__icontains =search_term)
+        message = f'{search_term}'
+        context = {
+            'message': message,
+            'results':results
+        }
+
+    return render(request, 'search.html', context)
+
+def profile(request, username):
+    user = User.objects.get(username = username)
+    profile = Profile.objects.get(user = user)
+    context = {
+        'profile': profile
+    }
+    return redirect(request,'profile.html', context)
+
+def edit_profile(request,username):
+    current_user = request.user
+    if request.method
